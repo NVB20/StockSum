@@ -11,16 +11,17 @@ def input_page():
     
     if request.method == 'POST':
         # Get the two variables from the form
-        high = request.form.get('high')
-        low = request.form.get('low')
-        risk = request.form.get('risk')
+        high = float(request.form.get('high'))  
+        low = float(request.form.get('low'))    
+        risk = float(request.form.get('risk')) 
+        
         
         # Calculate enter position and stop loss
         enter_position = high + 0.01
-        stop_lose = low - 0.01
+        stop_loss = low - 0.01
         
         # Calculate stock amount
-        stock_amount = math.floor(risk / (enter_position - stop_lose))
+        stock_amount = math.floor(risk / (enter_position - stop_loss))
 
         # Calculate deal cost
         deal_cost = stock_amount * enter_position
@@ -31,7 +32,7 @@ def input_page():
             'low': low,
             'risk': risk,
             'enter_position': enter_position,
-            'stop_lose': stop_lose,
+            'stop_loss': stop_loss,
             'stock_amount': round(stock_amount, 2),  # Round to 2 decimal places
             'deal_cost': round(deal_cost, 2)  # Round to 2 decimal places
 
