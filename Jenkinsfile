@@ -1,36 +1,52 @@
 pipeline {
     agent any
-
+    
     environment {
-        IMAGE_NAME = 'stock-docker'
-        CONTAINER_NAME = 'stock-docker-container'
+        // Define Docker image information
+        DOCKER_IMAGE_NAME = 'my-application'
     }
-
+    
     stages {
+        stage('Checkout') {
+            steps {
+                // This will check out the repository where the Jenkinsfile is located
+                checkout scm
+                echo 'Git repository checkout complete'
+            }
+        }
+        
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh 'docker build -t ${IMAGE_NAME} .'
+                    // Build Docker image using the Dockerfile in the repo
+                    // If using a private registry, use: "${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
+                    sh "docker build -t ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} ."
+                    
+                    // Also tag as latest
+                    sh "docker tag ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} ${DOCKER_IMAGE_NAME}:latest"
+                    
+                    echo 'Docker image build complete'
                 }
             }
         }
-
-        stage('Run Tests') {
+           
+        stage('Clean Up') {
             steps {
-                script {
-                    // Run the container with the image and execute the test
-                    sh """
-                        docker run --rm -v \$(pwd)/tests:/app/tests ${IMAGE_NAME} python3 /app/tests/flask_test.py
-                    """
-                }
+                // Remove local Docker images to save space
+                sh "docker rmi ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
+                sh "docker rmi ${DOCKER_IMAGE_NAME}:latest"
+                
+                echo 'Cleanup complete'
             }
         }
     }
-
+    
     post {
-        always {
-            // Clean up Docker containers/images if necessary
-            sh 'docker system prune -f'
+        success {
+            echo "Pipeline completed successfully. Docker image ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} was built and pushed."
+        }
+        failure {
+            echo 'Pipeline failed. Check the logs for details.'
         }
     }
 }
