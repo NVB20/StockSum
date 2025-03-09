@@ -13,6 +13,7 @@ pipeline {
                 // This will check out the repository where the Jenkinsfile is located
                 checkout scm
                 echo 'Git repository checkout complete'
+                sh 'ls -la'
                 
             }
         }
