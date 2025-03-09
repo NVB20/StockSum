@@ -1,10 +1,9 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request
 from tests.validations import check_values
 from handle.result import result_calc
 
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
-app.secret_key = 'your_secret_key'
     
 
 @app.route('/', methods=['GET', 'POST'])
