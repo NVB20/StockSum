@@ -50,17 +50,19 @@
         
         <button type="submit">Submit</button>
         
-        {% if result %}
-        <div class="result">
-            <h3>Calculation Results:</h3>
-            <p>Candle High: {{ result.high }}</p>
-            <p>Candle Low: {{ result.low }}</p>
-            <p>Enter Position At: {{ result.enter_position }}<span>$</span></p>
-            <p>Stop Loss At: {{ result.stop_loss }}<span>$</span></p>
-            <p>Buy Amount of Stocks: {{ result.stock_amount }}</p>
-            <p>Total Deal Cost: {{ result.deal_cost }}<span>$</span></p>
-        </div>
-    {% endif %}
+        {% if error_message %}
+            <p style="color: red;">Error: {{ error_message }}</p>
+        {% elif result %}
+            <div class="result">
+                <h3>Calculation Results:</h3>
+                <p>Candle High: {{ result.high }}</p>
+                <p>Candle Low: {{ result.low }}</p>
+                <p>Enter Position At: {{ result.enter_position }}<span>$</span></p>
+                <p>Stop Loss At: {{ result.stop_loss }}<span>$</span></p>
+                <p>Buy Amount of Stocks: {{ result.stock_amount }}</p>
+                <p>Total Deal Cost: {{ result.deal_cost }}<span>$</span></p>
+            </div>
+        {% endif %}
 
 </body>
 </html>
