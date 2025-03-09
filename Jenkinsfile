@@ -4,6 +4,7 @@ pipeline {
     environment {
         // Define Docker image information
         DOCKER_IMAGE_NAME = 'my-application'
+        DOCKER_IMAGE_TAG = 'latest'
     }
     
     stages {
