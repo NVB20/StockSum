@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:3.11'
-        }
-    }
+    agent any
     
     environment {
         // Define Docker image information
@@ -12,6 +8,10 @@ pipeline {
     }
     
     stages {
+        stage('Initialize'){
+        def dockerHome = tool 'myDocker'
+        env.PATH = "${dockerHome}/bin:${env.PATH}"
+    }
         stage('Checkout') {
             steps {
                 // This will check out the repository where the Jenkinsfile is located
