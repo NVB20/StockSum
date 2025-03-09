@@ -15,8 +15,8 @@ pipeline {
                     if (pythonInstalled != 0) {
                         echo "Python 3 not found, installing..."
                         sh '''
-                            sudo apt-get update
                             apt-get install -y sudo
+                            sudo apt-get update
                             sudo apt-get install -y python3 python3-pip python3-venv
                         '''
                     } else {
