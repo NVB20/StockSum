@@ -1,58 +1,36 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:3.9'
-        }
-    }
+    agent any
 
     environment {
-        VIRTUAL_ENV = 'venv'
+        IMAGE_NAME = 'stock-docker'
+        CONTAINER_NAME = 'stock-docker-container'
     }
 
     stages {
-        stage('Setup Virtual Environment') {
+        stage('Build Docker Image') {
             steps {
                 script {
-                    // Create virtual environment
-                    sh 'python3 -m venv venv'
+                    sh 'docker build -t ${IMAGE_NAME} .'
                 }
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Run Tests') {
             steps {
                 script {
-                    // Activate the virtual environment and install dependencies
-                    sh '. ${VIRTUAL_ENV}/bin/activate && pip install -r requirements.txt'
-                }
-            }
-        }
-
-        stage('Run Unit Tests') {
-            steps {
-                script {
-                    // Run the unit tests using unittest
-                    sh '. ${VIRTUAL_ENV}/bin/activate && python -m unittest discover -s tests -p "flask_test.py"'
-                }
-            }
-        }
-
-        stage('Build Project') {
-            steps {
-                script {
-                    // Build your project (e.g., using a build tool or custom command)
-                    echo "Building project..."
+                    // Run the container with the image and execute the test
+                    sh """
+                        docker run --rm -v \$(pwd)/tests:/app/tests ${IMAGE_NAME} python3 /app/tests/flask_test.py
+                    """
                 }
             }
         }
     }
 
     post {
-        success {
-            echo "Build and tests passed successfully!"
-        }
-        failure {
-            echo "Build or tests failed."
+        always {
+            // Clean up Docker containers/images if necessary
+            sh 'docker system prune -f'
         }
     }
 }
