@@ -7,6 +7,23 @@ pipeline {
     }
 
     stages {
+        stage('Install Python') {
+            steps {
+                script {
+                    // Install Python if it's not already installed
+                    def pythonInstalled = sh(script: "which python3", returnStatus: true)
+                    if (pythonInstalled != 0) {
+                        echo "Python 3 not found, installing..."
+                        sh '''
+                            sudo apt-get update
+                            sudo apt-get install -y python3 python3-pip python3-venv
+                        '''
+                    } else {
+                        echo "Python 3 is already installed."
+                    }
+                }
+            }
+        }
         stage('Setup') {
             steps {
                 script {
