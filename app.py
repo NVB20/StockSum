@@ -18,11 +18,11 @@ def input_page():
         error_message = check_values(high, low, risk)
 
         if error_message:
-            return render_template('index.html', error_message=error_message)
+            return render_template('index.html', error_message=error_message), 400
 
     result = result_calc(high, low, risk)
       
-    return render_template('index.html', result=result)
+    return render_template('index.html', result=result), 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
