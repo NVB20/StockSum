@@ -13,9 +13,14 @@ pipeline {
                 // This will check out the repository where the Jenkinsfile is located
                 checkout scm
                 echo 'Git repository checkout complete'
-                sh "ls -la"
+                
             }
         }
+        stage('Python Install') {
+            docker {
+                image 'python:latest'
+        }
+      }
         
         stage('Build Docker Image') {
             steps {
