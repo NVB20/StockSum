@@ -17,9 +17,11 @@ pipeline {
             }
         }
         stage('Python Install') {
-            docker {
-                image 'python:latest'
-        }
+            steps {
+                script {
+                    sh 'docker run --rm python:3.11 python --version'
+                }
+            }
       }
         
         stage('Build Docker Image') {
