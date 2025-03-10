@@ -1,29 +1,47 @@
 pipeline {
     agent any
     
-    environment {
-        // Define Docker image information
-        DOCKER_IMAGE_NAME = 'my-application'
-        DOCKER_IMAGE_TAG = 'latest'
-    }
-    
     stages {
         stage('Checkout') {
             steps {
-                // This will check out the repository where the Jenkinsfile is located
+                // Checkout code from Git repository
                 checkout scm
-                echo 'Git repository checkout complete'
-                sh 'ls -la'
                 
+                // Print information about the checked out repository
+                sh "git log -1"
+                sh "git branch"
+                sh "ls -la"
             }
         }
         
+        stage('Build') {
+            steps {
+                echo "Building the project..."
+                // Add your build commands here
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                echo "Running tests..."
+                // Add your test commands here
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                echo "Deploying the application..."
+                // Add your deployment commands here
+            }
+        }
+    }
+    
     post {
         success {
-            echo "Pipeline completed successfully. Docker image was built and pushed."
+            echo "Pipeline executed successfully!"
         }
         failure {
-            echo 'Pipeline failed. Check the logs for details.'
+            echo "Pipeline execution failed!"
         }
     }
 }
