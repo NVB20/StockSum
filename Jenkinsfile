@@ -22,7 +22,7 @@ pipeline {
         
         stage('Build Docker Image') {
             steps {
-                jiraComment body: 'test form jenkins', issueKey: $ISSUE_KEY
+                jiraComment body: 'test form jenkins', issueKey: 'CPG-8'
                 echo "Building the Docker Image..."
                 sh 'docker build -t $IMAGE_NAME .'
             }
