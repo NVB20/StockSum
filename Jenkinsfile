@@ -14,10 +14,10 @@ pipeline {
             }
         }
         
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
-                echo "Building the project..."
-                // Add your build commands here
+                echo "Building the Docker Image..."
+                sh 'docker build -t ${IMAGE_NAME} .'
             }
         }
         
