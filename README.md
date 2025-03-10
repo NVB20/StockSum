@@ -1,6 +1,6 @@
 # Stock Calculator Web App
 
-This is a simple web application built with Flask that calculates position size, stop loss, and deal cost for stock trading. It allows users to input the high and low values of a candle along with the risk amount. The app then calculates the following:
+This is a simple web application built with Flask that calculates position size, stop loss, and deal cost for stock trading. It allows users to input the high and low values of a candle along with the desired risk amount. The app then calculates the following:
 
 - **Enter Position**: The price at which the trade will be entered.
 - **Stop Loss**: The price at which the trade will be stopped to limit losses.
@@ -27,6 +27,14 @@ This is a simple web application built with Flask that calculates position size,
 
 This pipeline retrieves the available transitions for a Jira issue using the `jiraGetIssueTransitions` step.
 
+## Pipeline Steps
+1. **Set the issue key as an environment variable**  
+2. **Checkout the repository** - Clones the latest code from Git  
+3. **Build the Docker image** - Creates a Docker image from the applications source code  
+4. **Run unit tests** - Executes tests within the Docker container  
+5. **Cleanup** - Removes the Docker images and cleans the environment 
+
+
 ```groovy
 pipeline {
     agent any
@@ -44,10 +52,3 @@ pipeline {
         }
     }
 }
-
-the Jenkinsfile runs like this:
-1. set the issue key as enviroment variable
-2. checkout the git for the code
-3. build a docker image of the app on the git 
-4. run the uni tests on the docker image
-5. cleaning up the enviroment and removing the images
