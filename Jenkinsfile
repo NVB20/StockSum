@@ -49,8 +49,8 @@ pipeline {
         success {
             echo "Pipeline executed successfully!"
             jiraComment body: 'Pipeline executed successfully', issueKey: env.ISSUE_KEY
-            jiraTransitionIssue idOrKey: 'CPG-8', 
-                                  site: env.ISSUE_KEY, 
+            jiraTransitionIssue idOrKey: env.ISSUE_KEY, 
+                                  site: 'Jira-Stock', 
                                   input: [
                                       transition: [
                                           id: '31'  // Replace with the actual ID you found
