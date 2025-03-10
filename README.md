@@ -22,57 +22,18 @@ This is a simple web application built with Flask that calculates position size,
 - **HTML/CSS**: For structuring and styling the frontend.
 - **Python**: Backend logic for calculations.
 
-## Installation
 
-### Prerequisites
-
-- Python 3.x
-- Flask
-
-### Steps to Run the App Locally
-
-1. Clone this repository to your local machine:
-
-    ```bash
-    git clone https://github.com/your-username/stock-calculator.git
-    ```
-
-2. Navigate to the project folder:
-
-    ```bash
-    cd stock-calculator
-    ```
-
-3. Create a virtual environment (optional but recommended):
-
-    ```bash
-    python3 -m venv venv
-    ```
-
-4. Activate the virtual environment:
-
-    - On Windows:
-
-      ```bash
-      venv\Scripts\activate
-      ```
-
-    - On macOS/Linux:
-
-      ```bash
-      source venv/bin/activate
-      ```
-
-5. Install the required dependencies:
-
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-6. Run the Flask app:
-
-    ```bash
-    python app.py
-    ```
-
-7. Open your browser and visit [http://127.0.0.1:5000/](http://127.0.0.
+jenkins pipeline to find the ID of the columns of your project
+pipeline {
+    agent any
+    stages {
+        stage('Get Transitions') {
+            steps {
+                script {
+                    def transitions = jiraGetIssueTransitions idOrKey: 'YOUR-ISSUE-KEY', site: 'Jira-Stock'
+                    echo "Available transitions: ${transitions}"
+                }
+            }
+        }
+    }
+}
