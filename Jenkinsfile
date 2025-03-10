@@ -22,6 +22,7 @@ pipeline {
         
         stage('Build Docker Image') {
             steps {
+                jiraComment body: 'test message from pipeline', issueKey: '$ISSUE_KEY'
                 echo "Building the Docker Image..."
                 sh 'docker build -t $IMAGE_NAME .'
             }
