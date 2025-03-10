@@ -49,11 +49,11 @@ pipeline {
     post {
         success {
             echo "Pipeline executed successfully!"
-            jiraComment body: 'Pipeline executed successfully', issueKey: '$ISSUE_KEY'
+            jiraComment body: 'Pipeline executed successfully', issueKey: env.ISSUE_KEY
         }
         failure {
             echo "Pipeline execution failed!"
-            jiraComment body: 'Pipeline execution failed', issueKey: '$ISSUE_KEY'
+            jiraComment body: 'Pipeline execution failed', issueKey: env.ISSUE_KEY
         }
     }
 }
