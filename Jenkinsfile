@@ -28,10 +28,11 @@ pipeline {
             }
         }
         
-        stage('Deploy') {
+        stage('Cleanup') {
             steps {
-                echo "Deploying the application..."
-                // Add your deployment commands here
+                script {
+                    sh 'docker rmi -f $IMAGE_NAME || true'
+                }
             }
         }
     }
