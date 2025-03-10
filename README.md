@@ -44,3 +44,10 @@ pipeline {
         }
     }
 }
+
+the Jenkinsfile runs like this:
+1. set the issue key as enviroment variable
+2. checkout the git for the code
+3. build a docker image of the app on the git 
+4. run the uni tests on the docker image
+5. cleaning up the enviroment and removing the images
