@@ -5,7 +5,6 @@ pipeline {
         IMAGE_NAME = 'flask-stock'
         CONTAINER_NAME = 'stock-cont'
         ISSUE_KEY = 'CPG-8'
-        TRANSITION_NAME = 'Done' 
     }
     
     stages {
