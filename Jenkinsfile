@@ -47,11 +47,11 @@ pipeline {
     post {
         success {
             echo "Pipeline executed successfully!"
-            jiraAddComment comment: 'mission executed successfully!', idOrKey: 'CPG-8'
+            jiraComment body: 'Pipeline executed successfully', issueKey: 'CPG-8'
         }
         failure {
             echo "Pipeline execution failed!"
-            jiraAddComment comment: 'mission failed', idOrKey: 'CPG-8'
+            jiraComment body: 'Pipeline execution failed', issueKey: 'CPG-8'
         }
     }
 }
