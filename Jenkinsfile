@@ -1,5 +1,10 @@
 pipeline {
     agent any
+
+    environment {
+        IMAGE_NAME = 'flask-stock'
+        CONTAINER_NAME = 'stock-cont'
+    }
     
     stages {
         stage('Checkout') {
@@ -17,20 +22,27 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo "Building the Docker Image..."
-                sh 'docker build -t testerying .'
+                sh 'docker build -t $IMAGE_NAME .'
             }
         }
         
-        stage('Test') {
+        stage('Run Tests') {
             steps {
-                echo "Running tests..."
-                // Add your test commands here
+                script {
+                    sh "docker run --rm --name $CONTAINER_NAME $IMAGE_NAME pytest tests/flask_test.py --junitxml=results.xml"
+                }
+            }
+            post {
+                always {
+                    junit 'results.xml'
+                }
             }
         }
         
         stage('Cleanup') {
             steps {
                 script {
+                    echo "Cleaning up!"
                     sh 'docker rmi -f $IMAGE_NAME || true'
                 }
             }
