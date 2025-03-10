@@ -15,6 +15,8 @@ pipeline {
                 checkout scm
                 
                 // Print information about the checked out repository
+                sh "git log -1"
+                sh "git branch"
                 sh "ls -la"
             }
         }
