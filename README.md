@@ -23,17 +23,17 @@ This is a simple web application built with Flask that calculates position size,
 - **Python**: Backend logic for calculations.
 
 
-jenkins pipeline to find the ID of the columns of your project
-pipeline {
-    agent any
-    stages {
-        stage('Get Transitions') {
-            steps {
-                script {
-                    def transitions = jiraGetIssueTransitions idOrKey: 'YOUR-ISSUE-KEY', site: 'Jira-Stock'
-                    echo "Available transitions: ${transitions}"
-                }
-            }
-        }
-    }
-}
+## jenkins pipeline to find the ID of the columns of your project
+- pipeline {
+-    agent any
+-    stages {
+-        stage('Get Transitions') {
+-            steps {
+-                script {
+-                    def transitions = jiraGetIssueTransitions idOrKey: 'YOUR-ISSUE-KEY', site: 'Jira-Stock'
+-                    echo "Available transitions: ${transitions}"
+-                }
+-            }
+-        }
+-    }
+-}
