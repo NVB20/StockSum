@@ -32,11 +32,6 @@ pipeline {
                     sh "docker run --rm --name $CONTAINER_NAME $IMAGE_NAME pytest tests/flask_test.py --junitxml=results.xml"
                 }
             }
-            post {
-                always {
-                    junit 'results.xml'
-                }
-            }
         }
         
         stage('Cleanup') {
