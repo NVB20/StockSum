@@ -4,6 +4,7 @@ pipeline {
     environment {
         IMAGE_NAME = 'flask-stock'
         CONTAINER_NAME = 'stock-cont'
+        ISSUE_KEY = 'CPG-8'
     }
     
     stages {
@@ -47,11 +48,11 @@ pipeline {
     post {
         success {
             echo "Pipeline executed successfully!"
-            jiraComment body: 'Pipeline executed successfully', issueKey: 'CPG-8'
+            jiraComment body: 'Pipeline executed successfully', issueKey: '$ISSUE_KEY'
         }
         failure {
             echo "Pipeline execution failed!"
-            jiraComment body: 'Pipeline execution failed', issueKey: 'CPG-8'
+            jiraComment body: 'Pipeline execution failed', issueKey: '$ISSUE_KEY'
         }
     }
 }
