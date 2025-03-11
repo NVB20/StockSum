@@ -52,3 +52,6 @@ pipeline {
         }
     }
 }
+
+
+![Alt text](images/Jenkins_Pipeline.png)
