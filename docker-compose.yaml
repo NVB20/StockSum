@@ -13,6 +13,14 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock  # Allows Jenkins to access Docker
     environment:
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=false  # Auto-install Jenkins without setup wizard
+    command: >
+      bash -c "
+        apt-get update &&
+        apt-get install -y docker.io &&
+        usermod -aG docker jenkins &&
+        docker --version &&
+        /usr/local/bin/jenkins.sh
+      "
 
   postgres:
     image: postgres:14.17
