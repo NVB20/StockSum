@@ -1,4 +1,10 @@
 def check_values(high, low, risk):
+    if not str(high).isdigit():
+        return "High must be a Number"
+    if not str(low).isdigit():
+        return "Low must be a Number"
+    if not str(risk).isdigit():
+        return "Risk must be a Number"
     if risk <= 0: 
         return "Risk must be greater than 0"
     if high <= 0: 

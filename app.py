@@ -7,12 +7,15 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
     
 
 @app.route('/', methods=['GET', 'POST'])
-def input_page():   
+def input_page():  
+
+    result = ()
+
     if request.method == 'POST':
         
-        high = float(request.form.get('high'))  
-        low = float(request.form.get('low'))    
-        risk = float(request.form.get('risk')) 
+        high = request.form.get('high')
+        low = request.form.get('low')
+        risk = request.form.get('risk') 
 
 
         error_message = check_values(high, low, risk)
@@ -20,9 +23,9 @@ def input_page():
         if error_message:
             return render_template('index.html', error_message=error_message), 400
 
-    result = result_calc(high, low, risk)
+        result = result_calc(high, low, risk)
       
-    return render_template('index.html', result=result), 200
+    return render_template('index.html', result=result)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
