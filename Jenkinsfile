@@ -10,6 +10,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+                cleanWs()
                 // Checkout code from Git repository
                 checkout scm
                 
@@ -40,6 +41,7 @@ pipeline {
                 script {
                     echo "Cleaning up!"
                     sh 'docker rmi -f $IMAGE_NAME || true'
+                    cleanWs()
                 }
             }
         }
