@@ -55,6 +55,7 @@ pipeline {
                                   site: 'Jira-Stock', 
                                   input: [
                                       transition: [
+                                          id: '31'  
                                       ]
                                   ]
         }
