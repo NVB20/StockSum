@@ -11,6 +11,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout code from Git repository
+                cleanWs()
                 checkout scm
                 
                 // Print information about the checked out repository
