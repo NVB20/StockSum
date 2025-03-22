@@ -61,7 +61,7 @@ pipeline {
         }
         failure {
             echo "Pipeline execution failed!"
-            jiraComment body: 'Pipeline execution failed', issueKey: env.ISSUE_KEY
+            jiraAddComment comment: 'Pipeline execution failed', idOrKey: env.ISSUE_KEY, site: 'Jira-Stock'
         }
     }
 }
