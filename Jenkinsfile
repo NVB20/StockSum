@@ -55,7 +55,6 @@ pipeline {
                                   site: 'Jira-Stock', 
                                   input: [
                                       transition: [
-                                          id: '31'  // Replace with the actual ID you found
                                       ]
                                   ]
         }
