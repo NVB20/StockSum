@@ -1,5 +1,5 @@
 # 💸Stock Calculator Web App
-
+123
 This is a simple web application built with Flask that calculates stocks amount, stop loss, and deal cost for stock trading. It allows users to input the high and low values of a candle along with the desired risk amount. 
 
 - **Stock Amount**: The number of stocks to buy based on the risk.
