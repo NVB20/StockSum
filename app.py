@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from tests.validations import check_values
+from handle.validations import check_values
 from handle.result import result_calc
 
 app = Flask(__name__)
@@ -23,7 +23,7 @@ def input_page():
         if error_message:
             return render_template('index.html', error_message=error_message), 400
 
-        result = result_calc(high, low, risk)
+        result = result_calc(float(high), float(low), float(risk))
       
     return render_template('index.html', result=result)
 
