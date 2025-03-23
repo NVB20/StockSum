@@ -33,7 +33,7 @@
         <p style="color: red;">Error: {{ error_message }}</p>
     {% elif result %}
         <div class="result" id="result-container">
-            <button class="close-btn" onclick="closeResult()">&times;</button>
+            
             <h3>Calculation Results:</h3>
             <p><strong>Candle High:</strong> {{ result.high }}</p>
             <p><strong>Candle Low:</strong> {{ result.low }}</p>
@@ -41,9 +41,11 @@
             <p><strong>Stop Loss At:</strong> {{ result.stop_loss }}$</p>
             <p><strong>Buy Amount of Stocks:</strong> {{ result.stock_amount }}</p>
             <p><strong>Total Deal Cost:</strong> {{ result.deal_cost }}$</p>
+            <button class="close-btn" onclick="closeResult()">x</button>
         </div>
     {% endif %}
     </div>
+    
 <script>
     function closeResult() {
         let resultContainer = document.getElementById('result-container');
