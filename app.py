@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from handle.validations import check_values
 from handle.result import result_calc
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='css', static_url_path='/css')
 app.config['TEMPLATES_AUTO_RELOAD'] = True
     
 
