@@ -2,67 +2,132 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Stock Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Position Sizing Wizard</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            max-width: 550px;
-            margin: 0 auto;
-            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 480px;
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
         }
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         label {
+            font-weight: 600;
+            color: #34495e;
             display: block;
             margin-bottom: 5px;
         }
         input {
             width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #3498db;
+            border-radius: 8px;
+            background-color: #ecf0f1;
+            color: #34495e;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+        input:focus {
+            border-color: #2980b9;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #28a745;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #218838;
         }
         .result {
-            background-color: #f0f0f0;
-            padding: 10px;
-            margin-top: 20px;
-            border-radius: 5px;
+            background-color: #f1f8fd;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 8px;
+            border-left: 5px solid #3498db;
+        }
+        .result h3 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        .result p {
+            margin: 5px 0;
+            font-size: 16px;
+            color: #34495e;
+        }
+        .result p strong {
+            color: #2980b9;
+        }
+        .error-message {
+            color: #e74c3c;
+            font-weight: bold;
+            margin-top: 15px;
         }
     </style>
 </head>
 <body>
-    <h1>Position Size & Amount Calculator</h1>
-    <form method="POST" action="/">
-        <div class="form-group">
-            <label for="high">Candle High:</label>
-            <input type="text" id="high" name="high" required>
-        </div>
-        
-        <div class="form-group">
-            <label for="low">Candle Low:</label>
-            <input type="text" id="low" name="low" required>
-        </div>
-
-        <div class="form-group">
-            <label for="low">Risk Amount:</label>
-            <input type="text" id="risk" name="risk" required>
-        </div>
-        
-        <button type="submit">Submit</button>
+    <div class="container">
+        <h1>Position Sizing Wizard</h1>
+        <form method="POST" action="/">
+            <div class="form-group">
+                <label for="high">Candle High:</label>
+                <input type="number" id="high" name="high" required step="any">
+            </div>
+            
+            <div class="form-group">
+                <label for="low">Candle Low:</label>
+                <input type="number" id="low" name="low" required step="any">
+            </div>
+    
+            <div class="form-group">
+                <label for="risk">Risk Amount:</label>
+                <input type="number" id="risk" name="risk" required step="any">
+            </div>
+            
+            <button type="submit">Calculate</button>
+        </form>
         
         {% if error_message %}
-            <p style="color: red;">Error: {{ error_message }}</p>
+            <p class="error-message">Error: {{ error_message }}</p>
         {% elif result %}
             <div class="result">
                 <h3>Calculation Results:</h3>
-                <p>Candle High: {{ result.high }}</p>
-                <p>Candle Low: {{ result.low }}</p>
-                <p>Enter Position At: {{ result.enter_position }}<span>$</span></p>
-                <p>Stop Loss At: {{ result.stop_loss }}<span>$</span></p>
-                <p>Buy Amount of Stocks: {{ result.stock_amount }}</p>
-                <p>Total Deal Cost: {{ result.deal_cost }}<span>$</span></p>
+                <p><strong>Candle High:</strong> {{ result.high }}</p>
+                <p><strong>Candle Low:</strong> {{ result.low }}</p>
+                <p><strong>Enter Position At:</strong> {{ result.enter_position }}$</p>
+                <p><strong>Stop Loss At:</strong> {{ result.stop_loss }}$</p>
+                <p><strong>Buy Amount of Stocks:</strong> {{ result.stock_amount }}</p>
+                <p><strong>Total Deal Cost:</strong> {{ result.deal_cost }}$</p>
             </div>
         {% endif %}
-
+    </div>
 </body>
 </html>
