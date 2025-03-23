@@ -22,6 +22,7 @@ This is a simple web application built with Flask that calculates stocks amount,
 - **Docker & Docker Compose**: Containerizes the application and manages dependencies.  
 - **Ngrok**: Exposes the local Jenkins server to the internet (for Github Webhook).  
 - **Jira**: Tracks issue.  
+- **GitHub Webhook**: Triggers Jenkins builds upon code changes pushed to the GitHub repository.
 
 
 ## Pipeline Steps
@@ -30,8 +31,11 @@ This is a simple web application built with Flask that calculates stocks amount,
 3. **Build the Docker image** - Creates a Docker image from the applications source code.  
 4. **Run unit tests** - Executes tests within the Docker container.  
 5. **Cleanup** - Removes the Docker images and cleans the environment.
-6. **Results**: ✅If the pipeline succeeds, the Jira issue moves to **Done**. ❌Else, a failure comment is added to the issue.  
+6. **Results**:
+  - ✅If the pipeline succeeds, the Jira issue moves to **Done**.
+  - ❌Else, a failure comment is added to the issue
 
+  
 ## Pipeline
 ![Alt text](images/Jenkins_Pipeline.png)
 
