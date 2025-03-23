@@ -4,7 +4,7 @@ pipeline {
     environment {
         IMAGE_NAME = 'flask-stock'
         CONTAINER_NAME = 'stock-cont'
-        ISSUE_KEY = 'CPG-8'
+        ISSUE_KEY = sh(script: 'cat ./issue_key.txt', returnStdout: true).trim()
     }
     
     stages {
