@@ -81,7 +81,7 @@ button:hover {
 .result p strong {
     color: #2980b9;
 }
-/* /css/styles.css */
+
 .error-message {
     color: #e74c3c;
     font-weight: bold;
@@ -92,5 +92,21 @@ button:hover {
     background-color: #f8d7da; /* Light red background */
     border-radius: 5px; /* Rounded corners */
     border: 1px solid #f5c6cb; /* Red border */
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 25px;
+    text-align: center;
 }
 

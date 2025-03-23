@@ -30,18 +30,27 @@
         </form>
         
         {% if error_message %}
-            <p class="error-message">Error: {{ error_message }}</p>
-        {% elif result %}
-            <div class="result">
-                <h3>Calculation Results:</h3>
-                <p><strong>Candle High:</strong> {{ result.high }}</p>
-                <p><strong>Candle Low:</strong> {{ result.low }}</p>
-                <p><strong>Enter Position At:</strong> {{ result.enter_position }}$</p>
-                <p><strong>Stop Loss At:</strong> {{ result.stop_loss }}$</p>
-                <p><strong>Buy Amount of Stocks:</strong> {{ result.stock_amount }}</p>
-                <p><strong>Total Deal Cost:</strong> {{ result.deal_cost }}$</p>
-            </div>
-        {% endif %}
+        <p style="color: red;">Error: {{ error_message }}</p>
+    {% elif result %}
+        <div class="result" id="result-container">
+            <button class="close-btn" onclick="closeResult()">&times;</button>
+            <h3>Calculation Results:</h3>
+            <p><strong>Candle High:</strong> {{ result.high }}</p>
+            <p><strong>Candle Low:</strong> {{ result.low }}</p>
+            <p><strong>Enter Position At:</strong> {{ result.enter_position }}$</p>
+            <p><strong>Stop Loss At:</strong> {{ result.stop_loss }}$</p>
+            <p><strong>Buy Amount of Stocks:</strong> {{ result.stock_amount }}</p>
+            <p><strong>Total Deal Cost:</strong> {{ result.deal_cost }}$</p>
+        </div>
+    {% endif %}
     </div>
+<script>
+    function closeResult() {
+        let resultContainer = document.getElementById('result-container');
+        if (resultContainer) {
+            resultContainer.style.display = 'none';
+        }
+    }
+</script>
 </body>
 </html>
