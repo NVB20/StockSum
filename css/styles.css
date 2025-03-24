@@ -98,8 +98,8 @@ button:hover {
     
     top: 10px;
     right: 10px;
-    width: 25px;  /* Ensures a square button */
-    height: 25px;
+    width: 35px;  
+    height: 35px;
     background: red;
     color: white;
     border: none;
@@ -110,10 +110,40 @@ button:hover {
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    line-height: 1;  /* Prevents text misalignment */
+    line-height: 1;  
     padding: 0;
 }
 
 .close-btn:hover {
     background: darkred;
+}
+
+.button-nav {
+    width: 35px;  
+    height: 35px;
+    background: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    padding: 0;
+    margin: 10px 5px; 
+}
+
+.button-nav:hover {
+    background: rgb(7, 110, 29);
+}
+
+.button-container {
+    display: flex;
+    align-items: center;  /* Aligns buttons vertically */
+    justify-content: center;  /* Centers buttons */
+    gap: 10px; /* Adds space between buttons */
+    margin-top: 20px;
 }

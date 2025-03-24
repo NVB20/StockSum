@@ -41,7 +41,11 @@
             <p><strong>Stop Loss At:</strong> {{ result.stop_loss }}$</p>
             <p><strong>Buy Amount of Stocks:</strong> {{ result.stock_amount }}</p>
             <p><strong>Total Deal Cost:</strong> {{ result.deal_cost }}$</p>
+            <div class="button-container">
+            <button type="button" class="button-nav" onclick="goBack()">⬅</button>
             <button class="close-btn" onclick="closeResult()">x</button>
+            <button type="button" class="button-nav" onclick="goForward()"> ➡</button>
+            </div>
         </div>
     {% endif %}
     </div>
@@ -52,6 +56,13 @@
         if (resultContainer) {
             resultContainer.style.display = 'none';
         }
+    }
+    function goBack() {
+        window.history.back();
+    }
+
+    function goForward() {
+        window.history.forward();
     }
 </script>
 </body>
