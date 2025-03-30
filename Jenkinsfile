@@ -27,7 +27,7 @@ pipeline {
                 script {
                     def transitions = jiraGetIssueTransitions(
                         idOrKey: env.ISSUE_KEY, 
-                        site: $SITE_NAME
+                        site: '$SITE_NAME'
                     )
                     echo "Available transitions: ${transitions}"
                     
@@ -76,7 +76,7 @@ pipeline {
             echo "Pipeline executed successfully!"
             jiraComment body: 'Pipeline executed successfully', issueKey: env.ISSUE_KEY
             jiraTransitionIssue idOrKey: env.ISSUE_KEY, 
-                                  site: $SITE_NAME, 
+                                  site: '$SITE_NAME', 
                                   input: [
                                       transition: [
                                           id: env.DONE_TRANSITION_ID 
@@ -85,7 +85,7 @@ pipeline {
         }
         failure {
             echo "Pipeline execution failed!"
-            jiraAddComment comment: 'Pipeline execution failed', idOrKey: env.ISSUE_KEY, site: 'Jira-Stock'
+            jiraAddComment comment: 'Pipeline execution failed', idOrKey: env.ISSUE_KEY, site: '$SITE_NAME'
         }
     }
 }
