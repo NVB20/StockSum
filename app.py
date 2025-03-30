@@ -1,14 +1,16 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, g
 from handle.validations import check_values
 from handle.result import result_calc
+import uuid
+from mongo import insert_res
 
 app = Flask(__name__, static_folder='css', static_url_path='/css')
 app.config['TEMPLATES_AUTO_RELOAD'] = True
-    
+username = str(uuid.uuid4())
 
 @app.route('/', methods=['GET', 'POST'])
 def input_page():  
-
+    
     result = ()
 
     if request.method == 'POST':
@@ -22,8 +24,9 @@ def input_page():
 
         if error_message:
             return render_template('index.html', error_message=error_message), 400
-
+        
         result = result_calc(float(high), float(low), float(risk))
+        insert_res(result, username)  
       
     return render_template('index.html', result=result)
 
