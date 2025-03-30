@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, g
+from flask import Flask, render_template, request, session
 from handle.validations import check_values
 from handle.result import result_calc
 import uuid
@@ -6,10 +6,15 @@ from mongo import insert_res
 
 app = Flask(__name__, static_folder='css', static_url_path='/css')
 app.config['TEMPLATES_AUTO_RELOAD'] = True
-username = str(uuid.uuid4())
+app.secret_key = 'your_secret_key'
+
 
 @app.route('/', methods=['GET', 'POST'])
-def input_page():  
+def input_page():
+    if 'username' not in session:
+        session['username'] = str(uuid.uuid4())  # Generate a unique username per session
+    
+    username = session['username']  
     
     result = ()
 

@@ -1,6 +1,6 @@
 def check_values(high, low, risk):
     try:
-        high, low, risk = int(high), int(low), int(risk)
+        high, low, risk = float(high), float(low), float(risk)
     except ValueError:
         return "All inputs must be numbers"
     
