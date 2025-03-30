@@ -33,7 +33,7 @@ pipeline {
                     
                     def doneTransitionId = null
                     transitions.data.transitions.each { transition ->
-                        if (transition.name == $TRANSITION_NAME) {
+                        if (transition.name == '$TRANSITION_NAME') {
                             doneTransitionId = transition.id
                         }
                     }
