@@ -13,34 +13,13 @@ def insert_res(result, username):
     result_save = {"username": username,  "date": date_time, "result": result}
     collection.insert_one(result_save)
 
-
-def get_previous_result(username, date_time):
-    """
-    Get the previous result based on the given date and username.
-    """
-    # Convert date_time string to datetime object if necessary
-    date_time = datetime.datetime.strptime(date_time, "%Y-%m-%d %H:%M:%S") if isinstance(date_time, str) else date_time
-    
-    # Query the collection for a result with a date earlier than the given date
-    result = collection.find_one(
-        {"username": username, "date": {"$lt": date_time}},
-        sort=[("date", -1)]  # Sort by date in descending order to get the closest previous date
-    )
-    
-    return result
-
-
-def get_next_result(username, date_time):
-    """
-    Get the next result based on the given date and username.
-    """
-    # Convert date_time string to datetime object if necessary
-    date_time = datetime.datetime.strptime(date_time, "%Y-%m-%d %H:%M:%S") if isinstance(date_time, str) else date_time
-    
-    # Query the collection for a result with a date later than the given date
-    result = collection.find_one(
-        {"username": username, "date": {"$gt": date_time}},
-        sort=[("date", 1)]  # Sort by date in ascending order to get the closest next date
-    )
-    
-    return result
+def get_history(username):
+    results = collection.find({"username": username}).sort("date", 1)  # Sort by date in ascending order
+    history = list(results)  # Convert cursor to list
+    return history
+ 
+def get_result_by_index(username, index):
+    history = get_history(username)
+    if index < 0 or index >= len(history):
+        return None  # Index out of bounds
+    return history[index]
