@@ -5,6 +5,8 @@ pipeline {
         IMAGE_NAME = 'flask-stock'
         CONTAINER_NAME = 'stock-cont'
         ISSUE_KEY = sh(script: 'cat ./issue_key.txt', returnStdout: true).trim()
+        SITE_NAME = 'Jira-Stock'
+        TRANSITION_NAME = 'Done'
     }
     
     stages {
@@ -18,6 +20,28 @@ pipeline {
                 sh "git log -1"
                 sh "git branch"
                 sh "ls -la"
+            }
+        }
+        stage('Get Jira Transitions') {
+            steps {
+                script {
+                    def transitions = jiraGetIssueTransitions(
+                        idOrKey: env.ISSUE_KEY, 
+                        site: $SITE_NAME
+                    )
+                    echo "Available transitions: ${transitions}"
+                    
+                    def doneTransitionId = null
+                    transitions.data.transitions.each { transition ->
+                        if (transition.name == $TRANSITION_NAME) {
+                            doneTransitionId = transition.id
+                        }
+                    }
+                    
+                    env.DONE_TRANSITION_ID = doneTransitionId
+                    
+                    echo "Done transition ID: ${doneTransitionId}"
+                }
             }
         }
         
@@ -52,10 +76,10 @@ pipeline {
             echo "Pipeline executed successfully!"
             jiraComment body: 'Pipeline executed successfully', issueKey: env.ISSUE_KEY
             jiraTransitionIssue idOrKey: env.ISSUE_KEY, 
-                                  site: 'Jira-Stock', 
+                                  site: $SITE_NAME, 
                                   input: [
                                       transition: [
-                                          id: '31'  
+                                          id: env.DONE_TRANSITION_ID 
                                       ]
                                   ]
         }
