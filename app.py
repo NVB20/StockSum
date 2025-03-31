@@ -4,7 +4,7 @@ from handle.result import result_calc
 import uuid
 from mongo import insert_res, get_history, get_result_by_index
 
-app = Flask(__name__, static_folder='css', static_url_path='/css')
+app = Flask(__name__, static_folder='static', static_url_path='/static')
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.secret_key = 'your_secret_key'
 
