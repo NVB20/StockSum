@@ -59,7 +59,7 @@ def navigate():
         return jsonify({
             "new_index": new_index,
             "result": result['result'],  # Return the result to show in the frontend
-            "date": result['date'].strftime('%Y-%m-%d %H:%M:%S')  # Format date
+            "date": result['createdAt'].strftime('%Y-%m-%d %H:%M:%S')  # Format date
         })
     else:
         return jsonify({"error": "No result found"}), 404
